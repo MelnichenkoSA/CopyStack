@@ -9,17 +9,33 @@ namespace CopyStack
     internal class LinkedListStack
     {
         private Node head;
+        public int max;
+        private int count;
+        public int sum;
 
-        public LinkedListStack()
+        public LinkedListStack(int n)
         {
             head = null;
+            max = n;
+            count = 0;
+            sum = 0;
         }
 
         public void Push(int item)
         {
-            Node newNode = new Node(item);
-            newNode.Next = head;
-            head = newNode;
+            if(count == max )
+            {
+                Console.WriteLine("Стек полон");
+            }
+            else
+            {
+                Node newNode = new Node(item);
+                newNode.Next = head;
+                head = newNode;
+                count ++;
+                sum += item;
+            }
+
         }
 
         public int Pop()
@@ -32,6 +48,7 @@ namespace CopyStack
 
             int data = head.Data;
             head = head.Next;
+            sum -= data;
             return data;
         }
 
@@ -51,12 +68,24 @@ namespace CopyStack
             return head == null;
         }
 
-        public LinkedListStack Copy()
+        public int Sred()
         {
-            LinkedListStack copyStack = new LinkedListStack();
+            if (IsEmpty())
+            {
+                Console.WriteLine("Стек пуст");
+                return default(int);
+            } 
+
+            return (sum / count);
+        }
 
 
-            Node current = head;
+        public LinkedListStack (LinkedListStack a, int n)
+        {
+            max = n;
+            count = 0;
+
+            Node current = a.head;
             Node copiedNode = null;
 
 
@@ -68,7 +97,7 @@ namespace CopyStack
 
                 if (copiedNode == null)
                 {
-                    copyStack.head = newNode;
+                    this.head = newNode;
                 }
                 else
                 {
@@ -80,8 +109,6 @@ namespace CopyStack
                 copiedNode = newNode;
                 current = current.Next;
             }
-
-            return copyStack;
         }
     }
 }
