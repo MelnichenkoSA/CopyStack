@@ -10,11 +10,13 @@ namespace CopyStack
     {
         public int Data { get; }
         public Node Next { get; set; }
+        public int Index { get; set; }
 
         public Node(int data)
         {
             Data = data;
             Next = null;
+            Index = 0;
         }
     }
 }

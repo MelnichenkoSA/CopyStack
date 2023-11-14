@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CopyStack
+﻿namespace CopyStack
 {
     internal class LinkedListStack
     {
@@ -23,7 +17,7 @@ namespace CopyStack
 
         public void Push(int item)
         {
-            if(count == max )
+            if (count == max)
             {
                 Console.WriteLine("Стек полон");
             }
@@ -32,7 +26,10 @@ namespace CopyStack
                 Node newNode = new Node(item);
                 newNode.Next = head;
                 head = newNode;
-                count ++;
+                newNode.Index = 0;
+                GenerateIndex(head);
+
+                count++;
                 sum += item;
             }
 
@@ -45,11 +42,15 @@ namespace CopyStack
                 Console.WriteLine("Стек пуст");
                 return default(int);
             }
-
-            int data = head.Data;
-            head = head.Next;
-            sum -= data;
-            return data;
+            else
+            {
+                int data = head.Data;
+                head = head.Next;
+                head.Index = 0;
+                GenerateIndex(head);
+                sum -= data;
+                return data;
+            }
         }
 
         public int Peek()
@@ -74,13 +75,38 @@ namespace CopyStack
             {
                 Console.WriteLine("Стек пуст");
                 return default(int);
-            } 
+            }
 
             return (sum / count);
         }
 
+        public void GenerateIndex(Node head)
+        {
+            if (head.Next != null)
+            {
+                head.Next.Index = head.Index + 1;
+                GenerateIndex(head.Next);
+            }
+        }
+        public int FindIndex(int index, Node head)
+        {
+            if (!IsEmpty())
+            {
+                if (index == head.Index)
+                {
+                    return head.Data;
+                }
+                else
+                {
+                    FindIndex(index, head.Next);
+                }
 
-        public LinkedListStack (LinkedListStack a, int n)
+            }
+            return default(int);
+        }
+
+
+        public LinkedListStack(LinkedListStack a, int n)
         {
             max = n;
             count = 0;
@@ -110,5 +136,17 @@ namespace CopyStack
                 current = current.Next;
             }
         }
+
+        public int this[int index]
+        {
+            get
+            {
+                if (index < count)
+                    return FindIndex(index, head);
+                else
+                    return default;
+            }
+        }
+
     }
 }

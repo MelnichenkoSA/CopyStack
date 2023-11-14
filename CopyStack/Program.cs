@@ -30,3 +30,5 @@ while (!copyStack.IsEmpty())
 {
     Console.WriteLine("Извлечено: " + copyStack.Pop());
 }
+
+Console.WriteLine(stack[0]);
