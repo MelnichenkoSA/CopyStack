@@ -2,7 +2,7 @@
 {
     internal class LinkedListStack
     {
-        private Node head;
+        public Node head;
         public int max;
         private int count;
         public int sum;
@@ -46,8 +46,11 @@
             {
                 int data = head.Data;
                 head = head.Next;
-                head.Index = 0;
-                GenerateIndex(head);
+                if (head!= null)
+                {
+                    head.Index = 0;
+                    GenerateIndex(head);
+                }
                 sum -= data;
                 return data;
             }
@@ -90,7 +93,9 @@
         }
         public int FindIndex(int index, Node head)
         {
-            if (!IsEmpty())
+            Console.WriteLine(index);
+            Console.WriteLine(head.Index);
+            if (head != null)
             {
                 if (index == head.Index)
                 {
@@ -102,7 +107,9 @@
                 }
 
             }
-            return default(int);
+            else
+                return head.Data;
+            return 228;
         }
 
 
@@ -144,7 +151,7 @@
                 if (index < count)
                     return FindIndex(index, head);
                 else
-                    return default;
+                    return 228;
             }
         }
 

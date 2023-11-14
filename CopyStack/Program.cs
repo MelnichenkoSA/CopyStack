@@ -11,6 +11,8 @@ stack.Push(3);
 stack.Push(4);
 stack.Push(5);
 
+Console.WriteLine("Нулевой элемент: " + stack[1]);
+
 Console.WriteLine("Среднее:");
 Console.WriteLine(stack.Sred());
 
@@ -31,4 +33,4 @@ while (!copyStack.IsEmpty())
     Console.WriteLine("Извлечено: " + copyStack.Pop());
 }
 
-Console.WriteLine(stack[0]);
+
