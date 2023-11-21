@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CopyStack.Expexbex.Volume
 {
-    internal class MyVolumeException : Exception
+    internal class MyVolumeException : MyException
     {
         public MyVolumeException() : base()
         {

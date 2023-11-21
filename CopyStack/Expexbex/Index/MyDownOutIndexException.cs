@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CopyStack.Expexbex.Index
 {
-    internal class MyIndexException : MyException
+    internal class MyDownOutIndexException : MyOutIndexException
     {
-        public MyIndexException() : base()
+        public MyDownOutIndexException() : base()
         {
 
         }
-        public MyIndexException(string Message) : base(Message)
+        public MyDownOutIndexException(string Message) : base(Message)
         {
 
         }

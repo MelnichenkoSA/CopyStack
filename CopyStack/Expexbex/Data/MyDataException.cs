@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CopyStack.Expexbex.Data
 {
-    internal class MyDataException : Exception
+    internal class MyDataException : MyException
     {
         public MyDataException() : base()
         {

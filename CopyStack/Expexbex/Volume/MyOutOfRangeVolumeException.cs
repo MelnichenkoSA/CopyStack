@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace CopyStack.Expexbex.Volume
 {
-    internal class MyDownVolumeException : MyOutOfRangeVolumeException
+    internal class MyOutOfRangeVolumeException : MyVolumeException
     {
-        public MyDownVolumeException(string Message) : base(Message)
-        {
-
-        }
+        public MyOutOfRangeVolumeException(string Message) : base(Message) { }
     }
 }

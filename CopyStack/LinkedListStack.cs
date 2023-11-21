@@ -10,38 +10,50 @@ namespace CopyStack
         public int max;
         private int count;
         public int sum;
+        public int[] diapazon;
 
-        public LinkedListStack(int n)
+        public LinkedListStack(int n, int first, int end)
         {
+            if (n <= 0)
+                throw new MyVolumeException("Размер стэка должен быть больше 0");
+            if (first > end)
+                throw new MyDiapazonException("Диапазон задан неверно");
             head = null;
             max = n;
             count = 0;
             sum = 0;
+            diapazon = new int[2];
+            diapazon[0] = first;
+            diapazon[1] = end;
         }
 
         public void Push(int item)
         {
-            string Item = Convert.ToString(item);
-            if (int.TryParse(Item, out count))
+            if (diapazon[0] <= item) 
             {
-                if (count == max)
+                if (diapazon[1] >= item)
                 {
-                    throw new MyUpVolumeException("Stack is full");
+                    if (count == max)
+                    {
+                        throw new MyUpVolumeException("Stack is full");
+                    }
+                    else
+                    {
+                        Node newNode = new Node(item);
+                        newNode.Next = head;
+                        head = newNode;
+                        newNode.Index = 0;
+                        GenerateIndex(head);
+
+                        count++;
+                        sum += item;
+                    }
                 }
                 else
-                {
-                    Node newNode = new Node(item);
-                    newNode.Next = head;
-                    head = newNode;
-                    newNode.Index = 0;
-                    GenerateIndex(head);
-
-                    count++;
-                    sum += item;
-                }
+                    throw new MyUpOutDiapazonDataException("Число больше заданного диапазона");
             }
             else
-                throw new MyWrongDataException("Wrong Data");
+                throw new MyDownOutDiapazonDataException("Число меньше заданного диапазона");
 
         }
 
@@ -98,11 +110,9 @@ namespace CopyStack
                 GenerateIndex(head.Next);
             }
         }
-        public int FindIndex(string Index, Node head)
+        public int FindIndex(int index, Node head)
         {
-            string Indexstr = Index;
-            if (int.TryParse(Indexstr, out int index))
-            {
+
                 if (head != null)
                 {
                     if (index == head.Index)
@@ -111,19 +121,24 @@ namespace CopyStack
                     }
                     else
                     {
-                        if (head != null)
-                            return FindIndex(Index, head.Next);
-                        else
-                            throw new MyOutIndexException("Wrong Index");
+                        return FindIndex(index, head.Next);
                     }
 
                 }
                 else
                     throw new MyDownVolumeException("Stack is empty");
-            }
-            else
-                throw new MyWrongIndexException();
 
+
+        }
+        public void Sort()
+        {
+            for(int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < count; j++)
+                {
+
+                }
+            }
         }
 
 
@@ -162,8 +177,11 @@ namespace CopyStack
         {
             get
             {
-                string Index = Convert.ToString(index);
-                return FindIndex(Index, head);
+                if(index < 0)
+                    throw new MyDownOutIndexException("Индекс меньше допустимого");
+                if(index >= count)
+                    throw new MyUpOutIndexException("Индекс больше допустимого");
+                return FindIndex(index, head);
             }
         }
 
