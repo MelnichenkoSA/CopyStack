@@ -1,4 +1,8 @@
-﻿namespace CopyStack
+﻿using CopyStack.Expexbex.Data;
+using CopyStack.Expexbex.Index;
+using CopyStack.Expexbex.Volume;
+
+namespace CopyStack
 {
     internal class LinkedListStack
     {
@@ -17,21 +21,27 @@
 
         public void Push(int item)
         {
-            if (count == max)
+            string Item = Convert.ToString(item);
+            if (int.TryParse(Item, out count))
             {
-                Console.WriteLine("Стек полон");
+                if (count == max)
+                {
+                    throw new MyUpVolumeException("Stack is full");
+                }
+                else
+                {
+                    Node newNode = new Node(item);
+                    newNode.Next = head;
+                    head = newNode;
+                    newNode.Index = 0;
+                    GenerateIndex(head);
+
+                    count++;
+                    sum += item;
+                }
             }
             else
-            {
-                Node newNode = new Node(item);
-                newNode.Next = head;
-                head = newNode;
-                newNode.Index = 0;
-                GenerateIndex(head);
-
-                count++;
-                sum += item;
-            }
+                throw new MyWrongDataException("Wrong Data");
 
         }
 
@@ -39,14 +49,13 @@
         {
             if (IsEmpty())
             {
-                Console.WriteLine("Стек пуст");
-                return default(int);
+                throw new MyDownVolumeException("Stack is empty");
             }
             else
             {
                 int data = head.Data;
                 head = head.Next;
-                if (head!= null)
+                if (head != null)
                 {
                     head.Index = 0;
                     GenerateIndex(head);
@@ -60,8 +69,7 @@
         {
             if (IsEmpty())
             {
-                Console.WriteLine("Стек пуст");
-                return default(int);
+                throw new MyDownVolumeException("Stack is empty");
             }
 
             return head.Data;
@@ -76,8 +84,7 @@
         {
             if (IsEmpty())
             {
-                Console.WriteLine("Стек пуст");
-                return default(int);
+                throw new MyDownVolumeException("Stack is empty");
             }
 
             return (sum / count);
@@ -91,25 +98,32 @@
                 GenerateIndex(head.Next);
             }
         }
-        public int FindIndex(int index, Node head)
+        public int FindIndex(string Index, Node head)
         {
-            Console.WriteLine(index);
-            Console.WriteLine(head.Index);
-            if (head != null)
+            string Indexstr = Index;
+            if (int.TryParse(Indexstr, out int index))
             {
-                if (index == head.Index)
+                if (head != null)
                 {
-                    return head.Data;
+                    if (index == head.Index)
+                    {
+                        return head.Data;
+                    }
+                    else
+                    {
+                        if (head != null)
+                            return FindIndex(Index, head.Next);
+                        else
+                            throw new MyOutIndexException("Wrong Index");
+                    }
+
                 }
                 else
-                {
-                    FindIndex(index, head.Next);
-                }
-
+                    throw new MyDownVolumeException("Stack is empty");
             }
             else
-                return head.Data;
-            return 228;
+                throw new MyWrongIndexException();
+
         }
 
 
@@ -148,10 +162,8 @@
         {
             get
             {
-                if (index < count)
-                    return FindIndex(index, head);
-                else
-                    return 228;
+                string Index = Convert.ToString(index);
+                return FindIndex(Index, head);
             }
         }
 
