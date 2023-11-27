@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CopyStack
 {
     internal class Node
     {
-        public int Data { get; }
+        public dynamic Data { get; }
         public Node Next { get; set; }
         public int Index { get; set; }
 
-        public Node(int data)
+        public Node(dynamic x)
         {
-            Data = data;
+            Data = x;
             Next = null;
             Index = 0;
         }

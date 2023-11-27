@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CopyStack
 {
-    internal class SuperBool
+    internal class SuperBool : IComparable<SuperBool>
     {
         public bool front;
         public bool back;
@@ -17,7 +18,7 @@ namespace CopyStack
             Random rnd = new Random();
             this.front = front;
             this.back = back;
-            super = rnd.Next(1);
+            super = rnd.Next(11);
         }
 
         public static bool operator >(SuperInt a, SuperBool b)
@@ -88,6 +89,11 @@ namespace CopyStack
                     return true;
             else
                 return true;
+        }
+        public int CompareTo(SuperBool? person)
+        {
+            if (person is null) throw new ArgumentException("Некорректное значение параметра");
+            return super.CompareTo(person.super);
         }
     }
 }

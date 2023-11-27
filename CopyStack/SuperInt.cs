@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CopyStack
 {
-    internal class SuperInt
+    internal class SuperInt : IComparable<SuperInt>
     {
         public int front;
         public int back;
         public int left;
         public int right;
 
-        public SuperInt(int front, int back,int left,int right) 
+        public SuperInt(int front, int back, int left, int right)
         {
             this.front = front;
             this.back = back;
@@ -78,6 +78,12 @@ namespace CopyStack
                 return false;
             else
                 return true;
+        }
+        public int CompareTo(SuperInt? person)
+        {
+            if (person is null) throw new ArgumentException("Некорректное значение параметра");
+            return front.CompareTo(person.front);
+
         }
     }
 }

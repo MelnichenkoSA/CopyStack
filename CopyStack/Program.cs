@@ -4,9 +4,16 @@ using CopyStack.Expexbex.Volume;
 
 try
 {
-    LinkedListStack stack = new LinkedListStack(5, 0, 5);
+    LinkedListStack<SuperBool> stack = new LinkedListStack<SuperBool>(5, 0, 5);
 
-    stack.Push(1);
+    SuperBool sus = new SuperBool(true, false);
+    SuperBool esus = new SuperBool(false, true);
+    SuperBool ses = new SuperBool(true, false);
+    SuperBool uses = new SuperBool(false, false);
+
+    stack.Push(sus);
+
+    /*stack.Push(1);
     stack.Push(2);
     stack.Push(3);
     stack.Push(4);
@@ -63,7 +70,8 @@ try
     while (!copyStack.IsEmpty())
     {
         Console.WriteLine("Извлечено: " + copyStack.Pop());
-    }
+    }*/
+
 
 }
 catch (MyVolumeException ex)

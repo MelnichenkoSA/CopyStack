@@ -4,7 +4,7 @@ using CopyStack.Expexbex.Volume;
 
 namespace CopyStack
 {
-    internal class LinkedListStack
+    internal class LinkedListStack<T> where T : IComparable<T>
     {
         public Node head;
         public int max;
@@ -142,7 +142,7 @@ namespace CopyStack
         }
 
 
-        public LinkedListStack(LinkedListStack a, int n)
+        public LinkedListStack(LinkedListStack<T> a, int n)
         {
             max = n;
             count = 0;
