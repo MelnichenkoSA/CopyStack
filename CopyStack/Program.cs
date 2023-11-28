@@ -4,7 +4,7 @@ using CopyStack.Expexbex.Volume;
 
 try
 {
-    LinkedListStack<SuperBool> stack = new LinkedListStack<SuperBool>(5, 0, 5);
+    LinkedListStack<SuperBool> stack = new LinkedListStack<SuperBool>(5, 0, 11);
 
     SuperBool sus = new SuperBool(true, false);
     SuperBool esus = new SuperBool(false, true);
@@ -12,6 +12,12 @@ try
     SuperBool uses = new SuperBool(false, false);
 
     stack.Push(sus);
+    stack.Push(esus);
+    stack.Push(ses);
+    stack.Push(uses);
+
+    stack.SortSoft();
+    stack.SortHard();
 
     /*stack.Push(1);
     stack.Push(2);

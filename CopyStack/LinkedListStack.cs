@@ -27,11 +27,11 @@ namespace CopyStack
             diapazon[1] = end;
         }
 
-        public void Push(int item)
+        public void Push(dynamic item)
         {
-            if (diapazon[0] <= item) 
+            if (diapazon[0] >= item) 
             {
-                if (diapazon[1] >= item)
+                if (diapazon[1] <= item)
                 {
                     if (count == max)
                     {
@@ -46,7 +46,7 @@ namespace CopyStack
                         GenerateIndex(head);
 
                         count++;
-                        sum += item;
+                        sum = sum + item;
                     }
                 }
                 else
@@ -110,14 +110,14 @@ namespace CopyStack
                 GenerateIndex(head.Next);
             }
         }
-        public int FindIndex(int index, Node head)
+        public Node FindIndex(int index, Node head)
         {
 
                 if (head != null)
                 {
                     if (index == head.Index)
                     {
-                        return head.Data;
+                        return head;
                     }
                     else
                     {
@@ -130,15 +130,42 @@ namespace CopyStack
 
 
         }
-        public void Sort()
+        public void SortSoft()
         {
+            dynamic[] mas = new dynamic[count];
+            for (int i =0 ; i < count; i++)
+            {
+                mas[i] = this[i];
+            }
             for(int i = 0; i < count; i++)
             {
-                for (int j = 0; j < count; j++)
+                for (int j = 1; j < count; j++)
                 {
-
+                    if (mas[j] > mas[j-1])
+                    {
+                        dynamic temp = mas[j];
+                        mas[j] = mas[j-1];
+                        mas[j-1] = temp;
+                    }
                 }
             }
+            Console.WriteLine(mas.ToString());
+        }
+        public void SortHard()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 1; j < count; j++)
+                {
+                    if (this[j] > this[j - 1])
+                    {
+                        dynamic temp = this[j];
+                        this[j] = this[j - 1];
+                        this[j - 1] = temp;
+                    }
+                }
+            }
+            Console.WriteLine(this.ToString());
         }
 
 
@@ -173,7 +200,7 @@ namespace CopyStack
             }
         }
 
-        public int this[int index]
+        public dynamic this[int index]
         {
             get
             {
@@ -181,7 +208,11 @@ namespace CopyStack
                     throw new MyDownOutIndexException("Индекс меньше допустимого");
                 if(index >= count)
                     throw new MyUpOutIndexException("Индекс больше допустимого");
-                return FindIndex(index, head);
+                return FindIndex(index, head).Data;
+            }
+            set
+            {
+                FindIndex(index, head).Data = value;
             }
         }
 

@@ -18,7 +18,7 @@ namespace CopyStack
             Random rnd = new Random();
             this.front = front;
             this.back = back;
-            super = rnd.Next(11);
+            super = 5;
         }
 
         public static bool operator >(SuperInt a, SuperBool b)
@@ -28,6 +28,49 @@ namespace CopyStack
             else
                 return false;
         }
+        //////////////////////
+        public static bool operator >=(int b, SuperBool a)
+        {
+            if (a.super >= b)
+                return true;
+            else
+                return false;
+        }
+        public static bool operator <=(int b, SuperBool a)
+        {
+            if (a.super <= b)
+                return true;
+            else
+                return false;
+        }
+        public static bool operator >=(SuperBool a, int b)
+        {
+            if (a.super >= b)
+                return true;
+            else
+                return false;
+        }
+        public static bool operator <=(SuperBool a, int b)
+        {
+            if (a.super <= b)
+                return true;
+            else
+                return false;
+        }
+        public static dynamic operator +(SuperBool a, SuperBool b)
+        {
+            return a.super + b.super;
+        }
+        public static dynamic operator +(SuperBool a, int b)
+        {
+            return a.super + b;
+        }
+        public static dynamic operator +(int a, SuperBool b)
+        {
+            return a + b.super;
+        }
+
+        //////////////////////
         public static bool operator <(SuperInt a, SuperBool b)
         {
             if ((a.front > b.super) || (a.back > b.super) || (a.left > b.super) || (a.right > b.super))
@@ -89,6 +132,10 @@ namespace CopyStack
                     return true;
             else
                 return true;
+        }
+        public override string ToString()
+        {
+            return $"{this.front}" + $"{this.back}" + $"{this.super}";
         }
         public int CompareTo(SuperBool? person)
         {
