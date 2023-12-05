@@ -18,7 +18,7 @@ namespace CopyStack
             Random rnd = new Random();
             this.front = front;
             this.back = back;
-            super = 5;
+            super = rnd.Next(0,11);
         }
 
         public static bool operator >(SuperInt a, SuperBool b)
@@ -96,10 +96,7 @@ namespace CopyStack
         public static bool operator >(SuperBool a, SuperBool b)
         {
             if (a.super > b.super)
-                if (a.front == b.front)
-                    return true;
-                else 
-                    return false;
+                return true;
             else
                 return false;
         }
@@ -135,7 +132,7 @@ namespace CopyStack
         }
         public override string ToString()
         {
-            return $"{this.front}" + $"{this.back}" + $"{this.super}";
+            return $"{this.front}" + " " + $"{this.back}" + " " + $"{this.super}";
         }
         public int CompareTo(SuperBool? person)
         {

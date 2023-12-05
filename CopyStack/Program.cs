@@ -8,7 +8,7 @@ try
 
     SuperBool sus = new SuperBool(true, false);
     SuperBool esus = new SuperBool(false, true);
-    SuperBool ses = new SuperBool(true, false);
+    SuperBool ses = new SuperBool(true, true);
     SuperBool uses = new SuperBool(false, false);
 
     stack.Push(sus);
@@ -16,8 +16,15 @@ try
     stack.Push(ses);
     stack.Push(uses);
 
-    stack.SortSoft();
-    stack.SortHard();
+    foreach (var data in stack)
+    {
+        Console.WriteLine(data.ToString());
+    }
+
+    //stack.SortSoft();
+    //stack.SortHard();
+
+
 
     /*stack.Push(1);
     stack.Push(2);

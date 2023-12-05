@@ -1,16 +1,18 @@
 ﻿using CopyStack.Expexbex.Data;
 using CopyStack.Expexbex.Index;
 using CopyStack.Expexbex.Volume;
+using System.Collections;
 
 namespace CopyStack
 {
-    internal class LinkedListStack<T> where T : IComparable<T>
+    internal class LinkedListStack<T> : IEnumerable where T : IComparable<T>
     {
         public Node head;
         public int max;
-        private int count;
+        public int count;
         public int sum;
         public int[] diapazon;
+        public IEnumerator GetEnumerator() => new StackEnumerator<T>(this);
 
         public LinkedListStack(int n, int first, int end)
         {
@@ -57,7 +59,7 @@ namespace CopyStack
 
         }
 
-        public int Pop()
+        public dynamic Pop()
         {
             if (IsEmpty())
             {
@@ -77,7 +79,7 @@ namespace CopyStack
             }
         }
 
-        public int Peek()
+        public dynamic Peek()
         {
             if (IsEmpty())
             {
@@ -141,7 +143,8 @@ namespace CopyStack
             {
                 for (int j = 1; j < count; j++)
                 {
-                    if (mas[j] > mas[j-1])
+                    
+                    if (mas[j].CompareTo(mas[j - 1]) ==1)
                     {
                         dynamic temp = mas[j];
                         mas[j] = mas[j-1];
@@ -149,7 +152,7 @@ namespace CopyStack
                     }
                 }
             }
-            Console.WriteLine(mas.ToString());
+            StringToMas(mas);
         }
         public void SortHard()
         {
@@ -157,7 +160,7 @@ namespace CopyStack
             {
                 for (int j = 1; j < count; j++)
                 {
-                    if (this[j] > this[j - 1])
+                    if (this[j].CompareTo(this[j - 1]) ==1)
                     {
                         dynamic temp = this[j];
                         this[j] = this[j - 1];
@@ -165,14 +168,29 @@ namespace CopyStack
                     }
                 }
             }
-            Console.WriteLine(this.ToString());
+            this.StringTo();
+        }
+        public void StringToMas(dynamic[] x)
+        {
+            for(int i =0; i < x.Length; i++)
+            {
+                Console.WriteLine(x[i]);
+            }
+        }
+        public void StringTo()
+        {
+            int c = 0;
+            while (c<count)
+            {
+                Console.WriteLine("Извлечено: " + this[c]);
+                c++;
+            }    
         }
 
-
-        public LinkedListStack(LinkedListStack<T> a, int n)
+        public LinkedListStack(LinkedListStack<T> a)
         {
-            max = n;
-            count = 0;
+            max = a.max;
+            count = a.count;
 
             Node current = a.head;
             Node copiedNode = null;
