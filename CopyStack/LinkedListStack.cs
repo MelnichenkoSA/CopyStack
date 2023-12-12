@@ -31,9 +31,9 @@ namespace CopyStack
 
         public void Push(dynamic item)
         {
-            if (diapazon[0] >= item) 
+            if (diapazon[0] <= item) 
             {
-                if (diapazon[1] <= item)
+                if (diapazon[1] >= item)
                 {
                     if (count == max)
                     {

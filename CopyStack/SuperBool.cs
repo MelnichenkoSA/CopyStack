@@ -28,17 +28,17 @@ namespace CopyStack
             else
                 return false;
         }
-        //////////////////////
+        ////////////////////////////////////////////////////////
         public static bool operator >=(int b, SuperBool a)
         {
-            if (a.super >= b)
+            if (b >= a.super)
                 return true;
             else
                 return false;
         }
         public static bool operator <=(int b, SuperBool a)
         {
-            if (a.super <= b)
+            if (b <= a.super)
                 return true;
             else
                 return false;
@@ -57,6 +57,8 @@ namespace CopyStack
             else
                 return false;
         }
+        //////////////////////////////////////////////////////////////////
+
         public static dynamic operator +(SuperBool a, SuperBool b)
         {
             return a.super + b.super;

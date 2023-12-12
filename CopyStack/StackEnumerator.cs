@@ -35,8 +35,5 @@ namespace CopyStack
                 return false;
         }
         public void Reset() => pos = -1;
-
-
-
     }
 }

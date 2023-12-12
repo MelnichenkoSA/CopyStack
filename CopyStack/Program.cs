@@ -5,6 +5,13 @@ using CopyStack.Expexbex.Volume;
 try
 {
     LinkedListStack<SuperBool> stack = new LinkedListStack<SuperBool>(5, 0, 11);
+    LinkedListStack<int> stack1 = new LinkedListStack<int>(5, 0, 11);
+    stack1.Push(1);
+    stack1.Push(7);
+    stack1.Push(3);
+    stack1.Push(4);
+
+    stack1.SortSoft();
 
     SuperBool sus = new SuperBool(true, false);
     SuperBool esus = new SuperBool(false, true);
@@ -16,13 +23,14 @@ try
     stack.Push(ses);
     stack.Push(uses);
 
+    stack.SortSoft();
+
     foreach (var data in stack)
     {
         Console.WriteLine(data.ToString());
     }
 
-    //stack.SortSoft();
-    //stack.SortHard();
+    stack.SortHard();
 
 
 
