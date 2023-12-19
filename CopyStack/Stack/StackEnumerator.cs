@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CopyStack
+namespace CopyStack.Stack
 {
     internal class StackEnumerator<T> : IEnumerator where T : IComparable<T>
     {
         int pos = -1;
         LinkedListStack<T> stack;
-        public StackEnumerator(LinkedListStack<T> stack) 
+        public StackEnumerator(LinkedListStack<T> stack)
         {
             this.stack = stack;
         }

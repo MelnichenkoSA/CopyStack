@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CopyStack
+namespace CopyStack.Stack
 {
     internal class Node
     {

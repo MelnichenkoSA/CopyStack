@@ -3,14 +3,14 @@ using CopyStack.Expexbex.Index;
 using CopyStack.Expexbex.Volume;
 using System.Collections;
 
-namespace CopyStack
+namespace CopyStack.Stack
 {
     internal class LinkedListStack<T> : IEnumerable where T : IComparable<T>
     {
         public Node head;
         public int max;
         public int count;
-        public int sum;
+        public dynamic sum;
         public int[] diapazon;
         public IEnumerator GetEnumerator() => new StackEnumerator<T>(this);
 
@@ -31,7 +31,7 @@ namespace CopyStack
 
         public void Push(dynamic item)
         {
-            if (diapazon[0] <= item) 
+            if (diapazon[0] <= item)
             {
                 if (diapazon[1] >= item)
                 {
@@ -67,7 +67,7 @@ namespace CopyStack
             }
             else
             {
-                int data = head.Data;
+                dynamic data = head.Data;
                 head = head.Next;
                 if (head != null)
                 {
@@ -101,7 +101,7 @@ namespace CopyStack
                 throw new MyDownVolumeException("Stack is empty");
             }
 
-            return (sum / count);
+            return sum / count;
         }
 
         public void GenerateIndex(Node head)
@@ -115,40 +115,40 @@ namespace CopyStack
         public Node FindIndex(int index, Node head)
         {
 
-                if (head != null)
+            if (head != null)
+            {
+                if (index == head.Index)
                 {
-                    if (index == head.Index)
-                    {
-                        return head;
-                    }
-                    else
-                    {
-                        return FindIndex(index, head.Next);
-                    }
-
+                    return head;
                 }
                 else
-                    throw new MyDownVolumeException("Stack is empty");
+                {
+                    return FindIndex(index, head.Next);
+                }
+
+            }
+            else
+                throw new MyDownVolumeException("Stack is empty");
 
 
         }
         public void SortSoft()
         {
             dynamic[] mas = new dynamic[count];
-            for (int i =0 ; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 mas[i] = this[i];
             }
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 for (int j = 1; j < count; j++)
                 {
-                    
-                    if (mas[j].CompareTo(mas[j - 1]) ==1)
+
+                    if (mas[j].CompareTo(mas[j - 1]) == 1)
                     {
                         dynamic temp = mas[j];
-                        mas[j] = mas[j-1];
-                        mas[j-1] = temp;
+                        mas[j] = mas[j - 1];
+                        mas[j - 1] = temp;
                     }
                 }
             }
@@ -160,7 +160,7 @@ namespace CopyStack
             {
                 for (int j = 1; j < count; j++)
                 {
-                    if (this[j].CompareTo(this[j - 1]) ==1)
+                    if (this[j].CompareTo(this[j - 1]) == 1)
                     {
                         dynamic temp = this[j];
                         this[j] = this[j - 1];
@@ -168,11 +168,11 @@ namespace CopyStack
                     }
                 }
             }
-            this.StringTo();
+            StringTo();
         }
         public void StringToMas(dynamic[] x)
         {
-            for(int i =0; i < x.Length; i++)
+            for (int i = 0; i < x.Length; i++)
             {
                 Console.WriteLine(x[i]);
             }
@@ -180,11 +180,11 @@ namespace CopyStack
         public void StringTo()
         {
             int c = 0;
-            while (c<count)
+            while (c < count)
             {
                 Console.WriteLine("Извлечено: " + this[c]);
                 c++;
-            }    
+            }
         }
 
         public LinkedListStack(LinkedListStack<T> a)
@@ -204,7 +204,7 @@ namespace CopyStack
 
                 if (copiedNode == null)
                 {
-                    this.head = newNode;
+                    head = newNode;
                 }
                 else
                 {
@@ -222,9 +222,9 @@ namespace CopyStack
         {
             get
             {
-                if(index < 0)
+                if (index < 0)
                     throw new MyDownOutIndexException("Индекс меньше допустимого");
-                if(index >= count)
+                if (index >= count)
                     throw new MyUpOutIndexException("Индекс больше допустимого");
                 return FindIndex(index, head).Data;
             }
